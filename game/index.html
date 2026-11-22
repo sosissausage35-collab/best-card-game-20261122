@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Duel — a card battler</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">EMBER DUEL</div>
+    <div class="topinfo"><span id="roundLabel">Round 1 / 3</span><span id="scoreLabel">Score 0</span></div>
+    <button id="muteBtn" type="button" title="Toggle sound (M)">Sound: On</button>
+  </header>
+
+  <main id="table">
+    <!-- Opponent row -->
+    <section id="aiArea" class="side" aria-label="Opponent">
+      <div class="portrait ai-portrait" title="Cinder Warden">🔥</div>
+      <div class="fighter">
+        <div class="fighter-name"><span id="aiName">Cinder Warden</span><span id="aiShield" class="shield"></span></div>
+        <div class="hpbar"><div id="aiHpFill" class="hpfill"></div><span id="aiHpText" class="hptext"></span></div>
+        <div class="manabar"><span id="aiManaText" class="manatext"></span></div>
+      </div>
+      <div id="aiHand" class="hand ai-hand" aria-label="Opponent hand"></div>
+    </section>
+
+    <section id="middle">
+      <div id="log" aria-live="polite"></div>
+      <div id="centerMsg"></div>
+      <button id="endTurnBtn" type="button">End Turn <kbd>E</kbd></button>
+    </section>
+
+    <!-- Player row -->
+    <section id="playerArea" class="side" aria-label="You">
+      <div class="portrait player-portrait" title="You, the Ember Knight">🛡️</div>
+      <div class="fighter">
+        <div class="fighter-name"><span>You — Ember Knight</span><span id="playerShield" class="shield"></span></div>
+        <div class="hpbar"><div id="playerHpFill" class="hpfill"></div><span id="playerHpText" class="hptext"></span></div>
+        <div class="manabar"><span id="playerManaText" class="manatext"></span><span id="manaPips"></span></div>
+      </div>
+      <div id="playerHand" class="hand player-hand" aria-label="Your hand"></div>
+    </section>
+  </main>
+
+  <footer id="helpbar">
+    Click a card (or press <kbd>1</kbd>–<kbd>7</kbd>) to play it · <kbd>E</kbd> end turn · <kbd>Enter</kbd> start / play again · <kbd>M</kbd> sound
+  </footer>
+
+  <!-- Title overlay -->
+  <div id="titleScreen" class="overlay">
+    <div class="panel">
+      <h1>EMBER DUEL</h1>
+      <p class="tagline">A duel of ember, tide, gale &amp; stone.<br>Outplay the Cinder Warden in 3 rounds.</p>
+      <div class="rules">
+        <p><b>How to play</b></p>
+        <ul>
+          <li>Each turn you gain mana (🔷) and draw a card.</li>
+          <li>Cards cost mana: <b class="ember">Ember</b> burns, <b class="tide">Tide</b> heals, <b class="gale">Gale</b> draws, <b class="stone">Stone</b> shields.</li>
+          <li>Reduce the Warden to 0 ♥ to win the round. Win all <b>3 rounds</b> to win the duel — the Warden grows stronger each round.</li>
+          <li>Shield 🛡️ absorbs damage first. Your deck reshuffles when it runs out.</li>
+        </ul>
+      </div>
+      <button id="startBtn" type="button">⚔️ Start Duel</button>
+      <p class="hint">Mouse + keyboard · no network needed · best score is saved on this device</p>
+    </div>
+  </div>
+
+  <!-- End overlay -->
+  <div id="endScreen" class="overlay hidden">
+    <div class="panel">
+      <h1 id="endTitle">Victory!</h1>
+      <p id="endText"></p>
+      <p id="endScore" class="endscore"></p>
+      <button id="againBtn" type="button">↻ Play Again</button>
+      <p class="hint">Press Enter to play again</p>
+    </div>
+  </div>
+
+  <p id="status" role="status" aria-live="polite"></p>
+</div>
+<script src="./game.js"></script>
+</body>
+</html>
